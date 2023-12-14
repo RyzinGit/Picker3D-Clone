@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     {
         ballCollector = ballCollectorObj.GetComponent<BallCollectorHandler>();
         startMenuUI.SetActive(true);
+        Debug.Log(PlayerPrefs.GetInt("Level"));
     }
 
     void Update()
@@ -55,7 +56,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator EnableWall()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         ballWall.GetComponent<BoxCollider>().enabled = true;
 
