@@ -32,7 +32,9 @@ public class LevelManager : MonoBehaviour
         //PlayerPrefs.SetInt("Level",1); // DEBUG
         gameControllerSc = gameControllerObj.GetComponent<GameController>();
         
-        //setLevels
+        //init levels
+        if(PlayerPrefs.GetInt("Level1TotalBallCount") == 0){
+            
         PlayerPrefs.SetInt("Level1TotalBallCount",15);
         PlayerPrefs.SetInt("Level1ToCollectBallCount",5);
 
@@ -50,6 +52,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerPrefs.SetInt("Level6TotalBallCount",50);
         PlayerPrefs.SetInt("Level6ToCollectBallCount",25);
+        }
 
         LevelLoader(PlayerPrefs.GetInt("Level"));
     }
