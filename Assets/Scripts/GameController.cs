@@ -41,8 +41,6 @@ public class GameController : MonoBehaviour
 
     public void SetObjects(){
         levelManagerSc = levelManagerObj.GetComponent<LevelManager>();
-        Debug.Log(levelManagerSc+"=levelManagerSc");
-        Debug.Log(levelManagerObj+"=levelManagerObj");
         Level = levelManagerSc.GetLevelPrefab("Current");
         
 
@@ -79,7 +77,6 @@ public class GameController : MonoBehaviour
     }
 
     public void GameEndEvents(){
-        Debug.Log("gameEnd");
 
         ThrowBalls();
         StartCoroutine(EnableWall());

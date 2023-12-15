@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void Start(){
-        //PlayerPrefs.SetInt("Level",0); // DEBUG
+        //PlayerPrefs.SetInt("Level",1); // DEBUG
         gameControllerSc = gameControllerObj.GetComponent<GameController>();
         
         //setLevels
@@ -54,14 +54,16 @@ public class LevelManager : MonoBehaviour
         LevelLoader(PlayerPrefs.GetInt("Level"));
     }
 
-    private void LevelLoader(int requestedLevel){
+    public void LevelLoader(int requestedLevel){
         if(requestedLevel == 0 || requestedLevel == 7){
             PlayerPrefs.SetInt("Level",1);
+            requestedLevel = 1;
         }
-        var currLevel = AssetDatabase.LoadAssetAtPath("Assets/Scenes/Levels/Level"+requestedLevel+".prefab", typeof(GameObject));
-        Debug.Log(currLevel);
-        var nextLevel = AssetDatabase.LoadAssetAtPath("Assets/Scenes/Levels/Level"+(requestedLevel+1)+".prefab", typeof(GameObject));
-        Debug.Log(nextLevel+" DEBUG");
+        //var currLevel = AssetDatabase.LoadAssetAtPath("Assets/Scenes/Levels/Level"+requestedLevel+".prefab", typeof(GameObject));
+        var currLevel = Resources.Load("Levels/Level" + requestedLevel) as GameObject; //for build
+        //var nextLevel = AssetDatabase.LoadAssetAtPath("Assets/Scenes/Levels/Level"+(requestedLevel+1)+".prefab", typeof(GameObject));
+        var nextLevel = Resources.Load("Levels/Level" + (requestedLevel+1)) as GameObject; //for build
+        
         if(currLevel != null){
             currLevelPrefab = Instantiate(currLevel, new Vector3(0,0,-2+((requestedLevel-1)*25.3f)), Quaternion.identity) as GameObject;
         }
@@ -92,9 +94,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public GameObject GetLevelPrefab(string requested){
-        Debug.Log("GetLevelPrefab");
         if(requested == "Current"){
-            //Debug.Log(currLevelPrefab);
             return currLevelPrefab;
         }
         else if (requested == "Next"){
@@ -106,22 +106,22 @@ public class LevelManager : MonoBehaviour
     }
 
     public void InitNextLevel(int requestedLevel){
-        Debug.Log("exec");
+
         var currLevelPrefabTemp = currLevelPrefab;
         
         currLevelPrefab = nextLevelPrefab;
         Destroy(currLevelPrefabTemp);
 
-        var nextLevel = AssetDatabase.LoadAssetAtPath("Assets/Scenes/Levels/Level"+(requestedLevel+1)+".prefab", typeof(GameObject));
+        //var nextLevel = AssetDatabase.LoadAssetAtPath("Assets/Scenes/Levels/Level"+(requestedLevel+1)+".prefab", typeof(GameObject));
+        var nextLevel = Resources.Load("Levels/Level" + (requestedLevel+1)) as GameObject; //for build
         if(nextLevel != null){
             nextLevelPrefab = Instantiate(nextLevel, new Vector3(0,0,-2+(requestedLevel*25.3f)), Quaternion.identity) as GameObject;
         }
-        else{
-            PlayerPrefs.SetInt("Level",1);
-            LevelLoader(1);
-        }
-        
         gameControllerSc.SetObjects();
 
+    }
+
+    public void DestroyCurrLevel(){
+        Destroy(currLevelPrefab);
     }
 }

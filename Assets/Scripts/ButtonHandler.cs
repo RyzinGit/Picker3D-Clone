@@ -25,21 +25,32 @@ public class ButtonHandler : MonoBehaviour
         PlayerPrefs.SetInt("Level",_level);
     }
     public void SetLevelNextLevel(){
-        PlayerPrefs.SetInt("Level",GetLevel()+1);
-        levelManagerSc.InitNextLevel(PlayerPrefs.GetInt("Level"));
-        levelManagerSc.PlaceBalls(PlayerPrefs.GetInt("Level"));
+        
+        
+        if(PlayerPrefs.GetInt("Level") == 6){
+            
+            levelManagerSc.DestroyCurrLevel();
+            PlayerPrefs.SetInt("Level",1);
+            levelManagerSc.LevelLoader(1);
+
+        }
+        else{
+            PlayerPrefs.SetInt("Level",GetLevel()+1);
+            levelManagerSc.InitNextLevel(PlayerPrefs.GetInt("Level"));
+            levelManagerSc.PlaceBalls(PlayerPrefs.GetInt("Level"));
+        }
+
         playerMovementSc.MoveToLevel();
         gameControllerSc.SetInGameLevelText();
         gameControllerSc.DisableVictoryUI();
+
     }
     public void SetLevelCurrLevel(){
         
         levelManagerSc.PlaceBalls(PlayerPrefs.GetInt("Level"));
 
         playerMovementSc.MoveToLevel();
-        Debug.Log("EXEC");
         gameControllerSc.DisableDefeatUI();
     }
-
 
 }

@@ -10,7 +10,6 @@ public class InGameUIHandler : MonoBehaviour
     void Start()
     {
         UpdateLevelText();
-        
     }
 
     public void UpdateLevelText(){

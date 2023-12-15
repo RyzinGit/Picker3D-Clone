@@ -67,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
             endGame = true;
         }
          
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -86,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void MoveToLevel(){
-        Debug.Log("MoveToLevel");
         if(PlayerPrefs.GetInt("Level") != 0){
             transform.position = new Vector3(0,transform.position.y,-2+((PlayerPrefs.GetInt("Level")-1)*25.3f) );
         }

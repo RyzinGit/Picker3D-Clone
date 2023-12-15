@@ -53,7 +53,6 @@ public class BallHandler : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         StartCoroutine(DisableBall());
         
-
     }
 
     IEnumerator DisableBall()
@@ -71,6 +70,4 @@ public class BallHandler : MonoBehaviour
 
     }
 
-
 }
-

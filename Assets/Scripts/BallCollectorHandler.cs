@@ -19,7 +19,6 @@ public class BallCollectorHandler : MonoBehaviour
         
          if (coll.gameObject.CompareTag("Ball")){
             currCollectedBallCount++;
-            //Debug.Log(currCollectedBallCount);
             collecedBallText.text = currCollectedBallCount.ToString() + " / " + totalReqBallCount.ToString();
             StartCoroutine(PlayPopSound());
          }
@@ -43,7 +42,6 @@ public class BallCollectorHandler : MonoBehaviour
 
     public void SetTextObj(GameObject textObj){
         collecedBallText = textObj.GetComponent<TextMeshPro>();
-        //Debug.Log(collecedBallText);
 
     }
 
