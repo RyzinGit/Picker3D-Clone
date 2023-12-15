@@ -56,10 +56,10 @@ public class BallHandler : MonoBehaviour
 
     }
 
-        IEnumerator DisableBall()
+    IEnumerator DisableBall()
     {
         yield return new WaitForSeconds(Random.Range(1f, 2f));
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
     }
 

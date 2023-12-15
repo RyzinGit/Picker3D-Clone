@@ -26,9 +26,9 @@ public class ObjectPool : MonoBehaviour
     }
 
     public GameObject GetPooledBall(){
-
         for(int i = 0 ; i < pooledBalls.Count; i++){
             if(!pooledBalls[i].activeInHierarchy){
+                pooledBalls[i].GetComponent<MeshRenderer>().enabled = true;
                 return pooledBalls[i];
             }
         }

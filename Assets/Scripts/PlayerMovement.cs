@@ -13,10 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameController gameControllerSc;
     private Vector3 mousePos;
     private float horizontalChange;
-
-    
-    void Start()
-    {
+    void Start(){
+        MoveToLevel();
     }
 
     void Update()
@@ -43,9 +41,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 horizontalChange = 0;
             }   
-
-
-       
         
     }
 
@@ -65,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
          }
 
         if (coll.gameObject.CompareTag("BallCollectorEntryTrigger")){
-
             if(!endGame){
             GetComponent<GameController>().GameEndEvents();
             }
@@ -91,5 +85,18 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(popSound,0.4f);
     }
 
+    public void MoveToLevel(){
+        Debug.Log("MoveToLevel");
+        if(PlayerPrefs.GetInt("Level") != 0){
+            transform.position = new Vector3(0,transform.position.y,-2+((PlayerPrefs.GetInt("Level")-1)*25.3f) );
+        }
+        else{
+            PlayerPrefs.SetInt("Level",1);
+            transform.position = new Vector3(0,transform.position.y,-2+((PlayerPrefs.GetInt("Level")-1)*25.3f) );
+        }
+        
+        endGame = false;
+
+    }
 
 }
